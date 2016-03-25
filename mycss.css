@@ -7,8 +7,7 @@
 
 .main{
    width:980px;
-   height:1386px;
-   border:1px solid #999999;
+   height:1400px;
    margin:0 auto;  
    background:#FFFFFF; 
    padding:0 45px 0 45px;
@@ -192,6 +191,7 @@
    position:absolute;
    margin-top:193px;
    width:980px;
+  
 }
 
 #body3 #left{
@@ -385,7 +385,7 @@
   margin:0;
   padding:0;
   bottom:35px;
-  right:13px;
+  left:280px;
 }
 .hello p{
   font-size:14px;
@@ -412,9 +412,16 @@ position:absolute;
   bottom:-50px;
 }
 
+.end{
+  margin-top:34px;
+  border-top:1px #938e8c solid;
+}
 
-
-
+.end p{
+  font-size:12px;
+  font-family:"黑体";
+  color:#d45d5c;
+}
 
 
 
