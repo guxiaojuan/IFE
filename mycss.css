@@ -264,15 +264,14 @@
 
 .right img{
   width:458px;
-  height:318px;
+  height:275px;
 }
 
 .right .ptxt{
    position:absolute;
-   top:282px;
    padding:0;
    margin:0;
-   bottom:0;
+   bottom:25px;
    width:458px;
    height:61px;
    background:#333333;
@@ -312,7 +311,7 @@
   position:absolute;
   margin:0;
   padding:0;
-  top:378px;
+  bottom:-330px;
 }
 
 
@@ -382,10 +381,9 @@
 
 .hello{
   position:absolute;
-  margin:0;
-  padding:0;
+  right:25px;
   bottom:35px;
-  left:280px;
+ 
 }
 .hello p{
   font-size:14px;
@@ -394,7 +392,7 @@
   font-style:oblique;
 }
 
-.hello p span{
+.hello  span{
 
  font-size:72px;
  font-family:"黑体";
@@ -404,12 +402,13 @@
 
 #quo1{
 position:absolute;
-  bottom:20px;
+  bottom:17px;
 }
 
 #quo2{
   position:absolute;
-  bottom:-50px;
+  bottom:-55px;
+  right:0;
 }
 
 .end{
