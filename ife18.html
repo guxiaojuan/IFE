@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta http-equiv="content-type" content="text/html;charset=utf-8">
+   <title>队列模拟</title>
+   <style>
+     li{
+	   list-style:none;
+	   display:inline-block;
+	   color:#FFFFFF;
+	   background:#FF0000;
+	   width:30px;
+	   height:30px;
+	   text-align:center;
+	   line-height:30px;
+	   margin:5px 10px;
+	 }
+   </style>
+   
+</head>
+
+<body>
+ <div>
+   <input type="text" id="txt">
+   <input type="button" value="左侧入" name="btn">
+   <input type="button" value="右侧入" name="btn">
+   <input type="button" value="左侧出" name="btn">
+   <input type="button" value="右侧出" name="btn">
+ </div>
+ 
+ <div>
+    <ul></ul>
+ </div>
+ 
+ <script type="text/javascript">
+   var txt=document.getElementById("txt");
+   var btn=document.getElementsByName("btn");
+   var ul=document.getElementsByTagName("ul")[0];
+   //alert(ul[0]);
+   //alert(btn[0]);   //object HTMLInputElement
+   btn[0].onclick=function(){
+     if(txt.value.length==0){
+	    alert("输入为空");
+	 }
+	 else{
+	   var li=document.createElement("li");
+	   li.innerHTML=txt.value;
+       ul.insertBefore(li,ul.firstChild);
+	   txt.value="";	   
+	 }
+   }
+   btn[1].onclick=function(){
+     if(txt.value.length==0){
+	   alert("输入为空");
+	 }
+	 else{
+	   var li=document.createElement("li");
+	   li.innerHTML=txt.value;
+	   ul.appendChild(li);
+	   txt.value="";
+	 }
+   }
+   
+   btn[2].onclick=function(){
+      if(ul.childNodes.length){
+	     alert("即将出队列的是"+ul.firstChild.innerHTML);
+	     ul.removeChild(ul.firstChild);
+	  }
+	  else{
+	    alert("队列已为空");
+	  }
+   }
+   
+   btn[3].onclick=function(){
+      if(ul.childNodes.length){
+	     alert("即将出队列的是"+ul.lastChild.innerHTML);
+		 ul.removeChild(ul.lastChild);
+	  }
+	  else{
+	     alert("队列已为空");
+	  }
+   }
+ </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
