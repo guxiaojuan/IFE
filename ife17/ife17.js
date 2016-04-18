@@ -151,42 +151,50 @@ function initAqiChartData() {
         chartData = {};
         var Sum = 0;
         var dayNum = 0;
-        var str = "";
+	    var week=1;
+		var curMonth=0,flag=0;
         for (var i in cityDate) {
             var date = new Date(i);
             var day = date.getDay();
-            
+			var month=date.getMonth()+1;
+            if(curMonth==0){
+			   curMonth=month;
+			   flag=1;
+			}
+			if(curMonth!=month){
+				curMonth=month;
+				flag=0;
+			}
 			//var week=1;
             if (day ==0) {    // 一周从周日开始，也就是day为0
                 if (Sum > 0) {
                     var value = Math.floor(Sum / dayNum);
-                    var key = str +"-"+i + "平均";
+					if(flag==0){
+					  week=1;
+					  flag=1;
+					}
+                    var key = month+"月份第"+week + "周平均";
                     chartData[key] = value;
-					//week++;
+					week++;
                 }
                 dayNum = 0;
                 Sum = 0;
-                str=i;
             } 
-			
-			else if(str==""){
-				str=i;
-				//str=week;
-			}
-			
-		    //str = i;
+		
             dayNum++;
             Sum += cityDate[i];
         }
 
         if (Sum > 0) {
             var value = Math.floor(Sum / dayNum);
-            var key = str + "-" + i + "平均";
+			if(flag==0)
+			   week=1;
+			var key=month+"月份第"+week+"周平均";
             chartData[key] = value;
         }
     }
 
-    if (pageState.nowGraTime === "month") {
+    if (pageState.nowGraTime == "month") {
         chartData = {};
         var Month = -1;
         var dayNum = 0;
