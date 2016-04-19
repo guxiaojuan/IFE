@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>表单联动</title>
+<style type="text/css">
+  *{
+    margin:0;
+	padding:0;
+  }
+  form{
+    margin:20px 60px;
+  }
+   #Radio{
+     height:21px;
+   }
+   #Radio div{
+     float:left;
+	 margin:0 50px;
+   }
+   .nosch{ 
+	 display:none;
+   }
+   select{
+     border-radius:7px;
+	 height:30px;
+	 margin-top:30px;
+	 outline:none;
+   }
+   #city{
+     width:100px;
+	 margin-left:10px;
+   }
+   
+   #school{
+      width:240px;
+	  margin-left:40px;
+   }
+   
+   input[type=text]{
+      width:300px;
+	  height:30px;
+	  margin-top:30px;
+	  margin-left:20px;
+	  border-radius:7px;
+	  outline:none;
+   }
+   
+   
+
+</style>
+</head>
+
+<body>
+  <form>
+     <div id="Radio">
+       <div> <input type="radio" id="student" name="radio" checked="checked">在校生</div>
+	   <div><input type="radio" id="nostudent" name="radio">非在校生</div>
+	</div>
+	<div class="sch">
+	   <span>学校</span>
+	   <select id="city">
+		   <option>北京</option>
+		   <option>广东</option>
+		   <option>浙江</option>
+		   <option>甘肃</option>
+		   <option>上海</option>
+	   </select>
+	   <select id="school">
+		   <option>北京大学</option>
+		   <option>清华大学</option>
+		   <option>北京理工大学</option>
+	   </select>
+	  </div>
+	  
+	  <div class="nosch">
+	    就业单位<input type="text">
+	  </div>
+  </form>
+
+<script>
+   var date={
+     北京:['北京大学','清华大学','北京理工大学'],
+	 广东:['中山大学','暨南大学','华南理工大学'],
+	 浙江:['浙江大学','杭州电子科技大学','浙江理工大学'],
+	 甘肃:['兰州大学','兰州交通大学','西北师范大学'],
+	 上海:['复旦大学','同济大学','上海交通大学']
+   }
+   
+   var Radio=document.getElementById("Radio");
+   var city=document.getElementById("city");
+   var student=document.getElementById("student");
+   var sch=document.getElementsByClassName("sch")[0];
+   var nosch=document.getElementsByClassName("nosch")[0];
+   var nostudent=document.getElementById("nostudent");
+   
+   Radio.onchange=function(){
+     if(student.checked){
+	    sch.style.display="block";
+		nosch.style.display="none";
+	 }
+	 else{
+	   sch.style.display="none";
+	   nosch.style.display="block";
+	 }
+   }
+   
+   city.onchange=function(){
+     var selectOption=city.options[city.selectedIndex];
+	 var value=date[selectOption.text];
+	 var res='';
+	 //alert(value);
+	 for(var i=0;i<value.length;i++){
+	    res+='<option>'+value[i]+'</option>';
+	 }
+	 school.innerHTML=res;
+   }
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
