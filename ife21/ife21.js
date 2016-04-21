@@ -110,11 +110,17 @@ window.onload=function(){
 		var str=hobbyValue.value;
 		var tmp=str;
 		if(str.match(reg)){    
-			tmp=str.trim().split(reg);	
+			tmp=str.trim().split(reg);
+			for(var i in tmp){
+				if(tmp[i]){                 //是为了判断中文的句号，比如str。这种输入，会被分割出空字符串
+				  Hobby.str=tmp[i];
+				  Hobby.addTag();
+				}
+			}
 		}
-		for(var i in tmp){
-		   	Hobby.str=tmp[i];
-			Hobby.addTag();
+		else if(tmp){
+		   Hobby.str=tmp.trim();
+		   Hobby.addTag();
 		}
 		hobbyValue.value="";
 	}
