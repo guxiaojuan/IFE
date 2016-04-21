@@ -72,10 +72,12 @@ window.onload=function(){
 		if(str.match(reg) || event.keyCode ==13){    //换行符不管用，需要单独写，我的浏览器上中文符号也不识别
 			var tmp=str.trim().split(reg)[0];
 			//alert(tmp);
-			Tag.str=tmp;
-			//alert(Tag.arr);
-			Tag.addTag();
-			tagValue.value="";
+			if(tmp!=""){
+				Tag.str=tmp;
+				//alert(Tag.arr);
+				Tag.addTag();
+				tagValue.value="";
+			}
 		}			
     });
 	
