@@ -52,7 +52,7 @@ function show(){
 		if(i >= queue.length){
 			queue[i-1].style.background = '#fff';
 			clearInterval(timer);
-			if(flag==0)
+			if(flag==0 && text.value)
 			  alert("你要找的内容不存在");
 		}else{
 		    if(text.value && text.value == queue[i].innerHTML.split('<')[0].trim()){
@@ -80,7 +80,7 @@ function show(){
 
 var text;
 var selected;
-var divs=document.getElementsByTagName("div");
+var divs=document.getElementsByClassName("tree");
 window.onload=function(){
 	document.getElementById('dfs').onclick=function(){
 	
@@ -122,9 +122,12 @@ window.onload=function(){
 	   if(selected==undefined){
 		  alert("请选中要删除的节点");  
 	   }
-	   else{
-		  selected.parentNode.removeChild(selected);   
+	   else if(selected.parentNode){
+		  selected.parentNode.removeChild(selected);  
 	   }
+	   else{
+		  alert("点击错误");   
+	  }
 	}
 
 }
@@ -132,15 +135,8 @@ window.onload=function(){
 function selectDiv(){
 	 for(var i=0;i<divs.length;i++){
 		 divs[i].onclick=function(event){
-			  clearDiv();  //清理前边的修改
 			  event.stopPropagation();  //不阻止冒泡的话，会将改变冒泡到根节点
 			  selected=this;
 		 }
      }
-}
-
-function clearDiv(){
-   for(var i=0;i<divs.length;i++){
-	  divs[i].style.background="#fff"; 
-   }
 }
