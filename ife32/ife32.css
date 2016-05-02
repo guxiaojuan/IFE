@@ -1,0 +1,42 @@
+﻿
+/* CSS Document */
+
+*{
+  margin:0;
+  padding:0;
+  font-weight:bold;
+}
+
+div{
+ padding:50px;
+}
+
+input{
+  border:1px solid;
+  margin-left:20px;
+  height:20px;
+  width:300px
+}
+
+p{line-height:40px;}
+
+p:nth-child(5){margin-left:-30px;}
+
+.hint{color:#999999}
+span:nth-child(n+2){
+   margin-left:100px;
+}
+
+.rightSpan{
+  color:#00CC00;
+}
+.Right{border:2px solid #00CC00;}
+.wrongSpan{color:#FF0000;}
+.Wrong{border:2px solid #FF0000;}
+
+button{
+  width:40px;
+  height:30px;
+  margin-left:100px;
+  margin-top:-30px; 
+}
