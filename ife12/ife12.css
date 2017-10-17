@@ -1,0 +1,175 @@
+﻿/* CSS Document */
+
+*{
+  margin:0;
+  padding:0;
+}
+
+body{
+
+  margin:20px 40px;
+}
+
+table{
+  font-weight:bold;
+  font-family:"宋体";
+}
+
+#begin{
+  background-color:#000000;
+  color:#FFFFFF;
+}
+
+.red{
+  color:#FF0000;
+}
+
+.even{
+  background-color:#999999;
+}
+
+table tr:nth-last-child(9){
+  background-color:#999999;
+}
+
+input:focus{
+   width:400px;
+   border-color:#000099;
+}
+
+.banner{
+  width:350px;
+  height:150px;
+  position:relative;
+  overflow:hidden;
+
+}
+
+.ban{
+  position:relative;
+  width:300%;
+  transition:left 1s ease;
+  -moz-transition: left 1s ease; 
+  -webkit-transition: left 1s ease; 
+}
+
+ul li{
+  list-style:none;
+  width:350px;
+  height:150px;
+  float:left;
+}
+
+.ban li:nth-child(1){
+  background-color:red;
+  
+}
+
+.ban li:nth-child(2){
+  background-color:blue;
+}
+
+.ban li:nth-child(3){
+  background-color:green;
+}
+
+.control{
+  position:absolute;
+  bottom:0;
+  right:0;
+ 
+
+}
+
+.control a{
+  text-decoration:none;
+  padding:0 9px;
+  border:1px solid;
+  opacity:0.5;
+  background-color:black;
+  color:white;
+
+}
+
+#banner1:target~.ban{
+  left:0;
+ 
+}
+
+#banner2:target~.ban{
+  left:-100%;
+ 
+}
+
+#banner3:target~.ban{
+   left:-200%;
+ 
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

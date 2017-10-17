@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>三栏式布局</title>
+<style type="text/css">
+ .div{
+  margin:2px;
+  height:500px;
+  border:1px solid;
+  color:#666666;
+  background-color:#eee
+ }
+ 
+ .ddd{
+   background-color:#FFFFFF;
+   border:1px solid #999;
+   float:left;
+   margin-top:20px;
+   margin-left:20px;
+ }
+ 
+ #name{
+   height:150px;
+   width:17%;
+ }
+ 
+ #picture{
+   margin-top:6px; 
+   margin-left:4px;
+   border:1px #999999 solid;
+   float:left;  
+ }
+ 
+ .ddd .res{
+   margin-top:6px;
+   margin-left:17px;
+   border:1px#999999 solid;
+   /*position:absolute;*/
+  }
+  
+</style>
+
+</head>
+
+<body>
+<div class="div">
+
+   <div class="ddd" id="name">   
+     <img src="picture.jpg" alt="没有合照，囧" width="100px" height="100px" id="picture">
+	 <p dir="rtl" style="margin-top:6px">名字都是浮云</p>
+   </div>
+  
+  <div class="ddd" style="height:450px;width:66%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里是要自我介绍吗，哇哈哈~我们是暨南大学13级电气信息学院的学生，自认为各个都是萌妹子，囧←_←，但是没办法，就是觉得萌萌哒~对前端很感兴趣，所以就开始自学了，虽然没基础，但是会很努力的，加油！！！！每次看到自己写出的页面显示出来的时候，虽然丑了点，但是心里还是很爽的。。。。努力努力·~
+  
+  </div>
+  
+  <div class="ddd" style="height:450px;width:10%">
+      <img src="picture.jpg" alt="没有合照，囧" width="100px" height="100px" class="res">
+	  <img src="picture.jpg" alt="没有合照，囧" width="100px" height="100px" class="res">
+	  <img src="picture.jpg" alt="没有合照，囧" width="100px" height="100px" class="res">
+	  <img src="picture.jpg" alt="没有合照，囧" width="100px" height="100px" class="res">
+  </div>    
+  
+</div>
+
+</body>
+
+</html>
