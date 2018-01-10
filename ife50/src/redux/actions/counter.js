@@ -1,1 +1,10 @@
-export const increaseAction = { type: 'increase' }
+export function inc() {
+    return {
+        type:'INCREMENT',
+    }
+}
+export function dec() {
+    return {
+        type:'DECREMENT',
+    }
+}
