@@ -11,7 +11,7 @@ export default class Home extends React.Component{
                         <th width="30%">标题</th>
                         <th width="15%">时间</th>
                         <th width="15%">状态</th>
-                        <th width="27%">操作<button>新建问卷</button></th>
+                        <th width="27%">操作<button className={style.new}><span>+</span>新建问卷</button></th>
                     </tr>
                     </thead>
                     <tbody className={style.content}>
