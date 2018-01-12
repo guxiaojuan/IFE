@@ -1,0 +1,48 @@
+@import "base";
+body{
+  margin: 0;
+  padding: 0;
+  background-color: #EFEFEF;
+}
+
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5em;
+  color: white;
+  background: #EF7419;
+  font-size: 20px;
+  display: flex;
+
+  .title{
+    line-height: .8;
+    font-size: 90%;
+    margin-left: 2em;
+    margin-right: 2em;
+    .flex-center;
+  }
+  .title::before{
+    .flex-center;
+    width:1em;
+    height: 1em;
+    content:'?';
+    float: left;
+    background-color: white;
+    color: #EF7419;
+    border-radius: 100%;
+    font-weight: normal;
+    margin-right: .2em;
+  }
+  .tab{
+    float: left;
+    .flex-center;
+    font-size: 80%;
+    font-weight: normal;
+  }
+  .link{
+    text-decoration: none;
+    color: white;
+  }
+}

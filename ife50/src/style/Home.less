@@ -1,0 +1,40 @@
+@import "base";
+
+.container{
+  position: absolute;
+  top: 10em;
+  width: 90%;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  table{
+    border-collapse: collapse; //为表格设置边框合并模型
+  }
+  th{
+    text-align: left;
+  }
+  th:first-child{
+    padding-left: 3em;
+  }
+  .content{
+    background-color: white;
+    tr{
+      height: 3em;
+      border-bottom: 1px solid #ccc;
+      td:first-child{
+        padding-left:3em;    //td不能设置margin，table可以，td只能设置padding
+      }
+      td:first-child::before{
+        content:'';
+        width: 1em;
+        height: 1em;
+        border-radius: 100%;
+        background-color: #eee;
+        border:1px solid #ddd;
+        display:block;
+        position: absolute;
+        left: 1em;
+      }
+    }
+  }
+}
