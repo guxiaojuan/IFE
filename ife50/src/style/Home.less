@@ -13,15 +13,23 @@
 
   th{
     text-align: left;
+    padding-bottom:1em;
   }
   button{
     margin-right:3em;
   }
   th:first-child{
-    padding-left: 3em;
+    padding-left: 4em;
   }
   .new{
     margin-left:3.8em;
+    background-color: #EF7419;
+    color:white;
+    border: none;
+    padding: .4em 1em;
+    span{
+      margin-right:.5em;
+    }
   }
   .content{
     background-color: white;
@@ -29,7 +37,7 @@
       height: 3em;
       border-bottom: 1px solid #ccc;
       td:first-child{
-        padding-left:3em;    //td不能设置margin，table可以，td只能设置padding
+        padding-left:4em;    //td不能设置margin，table可以，td只能设置padding
       }
       td:first-child::before{
         content:'';
@@ -40,8 +48,30 @@
         border:1px solid #ddd;
         display:block;
         position: absolute;
-        left: 1em;
+        left:2em;
       }
+    }
+  }
+  .wrap{
+    padding-top: 2em;
+    padding-bottom: 4em;
+    background-color: white;
+    .del::before{
+      content: '';
+      width: 1em;
+      height: 1em;
+      border-radius: 100%;
+      background-color: #eee;
+      border:1px solid #ddd;
+      display:block;
+      position: absolute;
+      left: 2em;
+    }
+    .del{
+      margin-left:4em;
+    }
+    .btn{
+      margin-left: 2em;
     }
   }
 }

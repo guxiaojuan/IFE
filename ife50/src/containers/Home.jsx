@@ -46,6 +46,12 @@ export default class Home extends React.Component{
                     </tr>
                     </tbody>
                 </table>
+
+                <div className={style.wrap}>
+                    <div className={style.del}>全选
+                        <button className={style.btn}>删除</button>
+                    </div>
+                </div>
             </div>
         )
     }
