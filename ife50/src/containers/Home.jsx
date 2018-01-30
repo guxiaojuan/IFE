@@ -1,6 +1,16 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import * as QuestionnaireActions from '../redux/actions/questionnaires'
+import * as DialogActions  from '../redux/actions/dialog'
+import {RADIO, CHECKBOX, TEXT} from "../constants/QuestionTypes"
+import {UNRELEASED, CLOSED, RELEASED} from "../constants/QuestionnaireStatusTypes"
 import style from '../style/Home.less'
 
+
+const testOptions = (props, propName, componentName) => {
+    if(props.type !== TEXT)
+}
 export default class Home extends React.Component{
     render() {
         return (
@@ -16,7 +26,7 @@ export default class Home extends React.Component{
                     </thead>
                     <tbody className={style.content}>
                     <tr>
-                        <td>这是我的第一份问卷</td>
+                        <td><span className={style.lspan}></span>这是我的第一份问卷</td>
                         <td>2018-01-12</td>
                         <td>已结束</td>
                         <td>
@@ -25,7 +35,7 @@ export default class Home extends React.Component{
                         </td>
                     </tr>
                     <tr>
-                        <td>这是我的第二份问卷</td>
+                        <td><span className={style.lspan}></span>这是我的第二份问卷</td>
                         <td>2018-01-12</td>
                         <td>未发布</td>
                         <td>
@@ -35,7 +45,7 @@ export default class Home extends React.Component{
                         </td>
                     </tr>
                     <tr>
-                        <td>这是我的第三份问卷</td>
+                        <td><span className={style.lspan}></span>这是我的第三份问卷</td>
                         <td>2018-01-12</td>
                         <td>发布中</td>
                         <td>
@@ -48,7 +58,7 @@ export default class Home extends React.Component{
                 </table>
 
                 <div className={style.wrap}>
-                    <div className={style.del}>全选
+                    <div className={style.del}><span className={style.all}></span>全选
                         <button className={style.btn}>删除</button>
                     </div>
                 </div>
