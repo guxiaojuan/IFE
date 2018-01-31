@@ -54,3 +54,6 @@ export const isArray = (element) => {
 export const isDate = (element) => {
     return Object.prototype.toString.call(element) === '[object Date]'
 }
+export const isInteger = (num) =>{
+    typeof num === 'number' && parseInt(num, 10) === num
+}
