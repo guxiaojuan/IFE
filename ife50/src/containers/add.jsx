@@ -11,7 +11,7 @@ export default class Add  extends React.Component {
 	};
 	render () {
 		return (
-			<div className={style.container}>
+			<div className={style.container} >
 				<button onClick={this.addQuestion}><span>+</span>新建问卷</button>
 			</div>
 		)
