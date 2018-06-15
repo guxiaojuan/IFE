@@ -3,6 +3,13 @@ import style from '../style/Edit.less'
 
 
 export default class Edit extends React.Component{
+	constructor(props) {
+		super(props);
+		this.addSelection = this.addSelection.bind(this)
+	}
+	addSelection () {
+
+	}
     render(){
         return(
             <div className={style.container}>
@@ -11,8 +18,8 @@ export default class Edit extends React.Component{
 				</div>
 
 				<div className={style.content}>
+					<ul></ul>
 					<button>
-						<span>+</span>
 						<span className={style.add}>添加问题</span>
 					</button>
 				</div>
