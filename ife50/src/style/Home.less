@@ -1,76 +1,76 @@
 @import "base";
 
-.container{
+.container {
   position: absolute;
   top: 10em;
   width: 90%;
   left: 50%;
   transform: translate(-50%, 0);
 
-  table{
+  table {
     border-collapse: collapse; //为表格设置边框合并模型
   }
 
-  th{
+  th {
     text-align: left;
-    padding-bottom:1em;
+    padding-bottom: 1em;
   }
-  button{
-    margin-right:3em;
+  button {
+    margin-right: 3em;
   }
-  th:first-child{
+  th:first-child {
     padding-left: 4em;
   }
-  .new{
-    margin-left:3.8em;
+  .new {
+    margin-left: 3.8em;
     background-color: #EF7419;
-    color:white;
+    color: white;
     border: none;
     padding: .4em 1em;
-    span{
-      margin-right:.5em;
+    span {
+      margin-right: .5em;
     }
   }
-  .content{
+  .content {
     background-color: white;
-    tr{
+    tr {
       height: 3em;
       border-bottom: 1px solid #ccc;
-      td:first-child{
-        padding-left:4em;    //td不能设置margin，table可以，td只能设置padding
+      td:first-child {
+        padding-left: 4em; //td不能设置margin，table可以，td只能设置padding
       }
-      .lspan{
-        content:'';
+      .lspan {
+        content: '';
         width: 1em;
         height: 1em;
         border-radius: 100%;
         background-color: #eee;
-        border:1px solid #ddd;
-        display:block;
+        border: 1px solid #ddd;
+        display: block;
         position: absolute;
-        left:2em;
+        left: 2em;
       }
     }
   }
-  .wrap{
+  .wrap {
     padding-top: 2em;
     padding-bottom: 4em;
     background-color: white;
-    .all{
+    .all {
       content: '';
       width: 1em;
       height: 1em;
       border-radius: 100%;
       background-color: #eee;
-      border:1px solid #ddd;
-      display:block;
+      border: 1px solid #ddd;
+      display: block;
       position: absolute;
       left: 2em;
     }
-    .del{
-      margin-left:4em;
+    .del {
+      margin-left: 4em;
     }
-    .btn{
+    .btn {
       margin-left: 2em;
     }
   }

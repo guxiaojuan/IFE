@@ -1,4 +1,4 @@
-import cloneObject from '../../common/util'
+import {cloneObject} from '../../common/util'
 import {RADIO, CHECKBOX, TEXT} from "../../constants/QuestionTypes"
 import {UNRELEASED, RELEASED, CLOSED} from "../../constants/QuestionnaireStatusTypes";
 
@@ -29,29 +29,24 @@ export default function questionnaires(state = initialState, action) {
     switch (action.type){
         case 'ADD_QUESTIONNAIRE':{
             const {list} = state
+            const editing = cloneObject(initialEditing)
+            editing.questionnaires = list.length
             return Object.assign(
                 {},
                 state,
-                {
-                    editing: {
-                        ...cloneObject(initialEditing),
-                        questionnaire: list.length
-                    }
-                }
+                editing
             )
         }
         case 'EDIT_QUESTIONNAIRE':{
             const {list} = state
+            const editing = cloneObject(initialEditing)
             const questionnaire = action.payload
             const {title, time} = list[questionnaire]
             const questions = cloneObject(list[questionnaire].quesitons)
-            const editing = {
-                ...cloneObject(initialEditing),
-                questionnaire,
-                title,
-                time,
-                questions
-            }
+            editing.questionnaire = questionnaire
+            editing.title = title
+            editing.time = time
+            editing.questions = questions
             return Object.assign(
                 {},
                 state,
@@ -112,20 +107,20 @@ export default function questionnaires(state = initialState, action) {
             const {list} = state
             const questionnaire = action.payload
             let data = []
-            list[questionnaire].quesitons.forEach(key, index) => {
+            list[questionnaire].quesitons.forEach((key, index) => {
                 switch (key.type){
                     case RADIO: {data.push(-1);   break}
                     case CHECKBOX: {data.push([]);   break}
                     case TEXT: {data.push('');   break}
 
                 }
-            }
+            })
             return Object.assign(
                 {},
                 state,
                 {
                     list,
-                    editing:{...cloneObject(initialEditing), questionnaire, data}
+                    editing:cloneObject(initialEditing)
                 }
             )
         }
@@ -155,20 +150,17 @@ export default function questionnaires(state = initialState, action) {
             const { content, question, option } = action.payload
             if(question !== -1 && option !== -1 && editing.questions[question].type === TEXT) {
                 editing.questions[question].content = content
-                return Object.assign(
-                    {},
-                    state,
-                    { editing }
-                )
             }else{
-                return Object.assign(
-                    {},
-                    state,
-                    {
-                        editing:{...editing, question, option, text: {typing: true, content}}
-                    }
-                )
+                editing.text={
+                    typing: true,
+                    content
+                }
             }
+            return Object.assign(
+                {},
+                state,
+                { editing }
+            )
         }
         case 'SAVE_TEXT': {
             const { editing } = state
@@ -195,10 +187,11 @@ export default function questionnaires(state = initialState, action) {
         case 'CHOOSE_TYPE': {
             const { editing } = state
             const type = editing.type^1
+            editing.type = type
             return Object.assign(
                 {},
                 state,
-                { editing: {...editing, type}}
+                { editing }
             )
         }
         case 'ADD_QUESTION': {
@@ -316,11 +309,14 @@ export default function questionnaires(state = initialState, action) {
         }
         case 'CHECK_DATA': {
             const questionnaire = action.payload
+            const editing = cloneObject(initialEditing)
+            editing.questionnaire = questionnaire
             return Object.assign(
                 {},
                 state,
-                { editing: { ...cloneObject(initialEditing), questionnaire }}
+                editing
              )
         }
+        default:return state
     }
 }

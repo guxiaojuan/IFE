@@ -6,48 +6,61 @@ import * as DialogActions  from '../redux/actions/dialog'
 import {RADIO, CHECKBOX, TEXT} from "../constants/QuestionTypes"
 import {UNRELEASED, CLOSED, RELEASED} from "../constants/QuestionnaireStatusTypes"
 import style from '../style/Home.less'
-import {isArray, isInteger} from "../common/util"
-import questionnaires from "../redux/reducers/questionnaires"
-import dialog from "../redux/reducers/dialog";
+import {isArray, isInteger, cloneObject} from "../common/util"
+import {addQuestionnaire} from "../redux/actions/questionnaires";
 
-
-const testOptions = (props, propName, componentName) => {
-    if(props.type !== TEXT && !(props.options && isArray(props.options)) && props.options.every((key) => typeof key === 'string')){
-        return new Error(`Invalid prop ${propName} supplied to ${componentName}`)
-    }
-}
-const testIsRequired = (props, propName, componentName) => {
-    if(props.type === TEXT && typeof props.isRequired !== 'boolean'){
-        return new Error(`Invalid prop ${propName} supplied to ${componentName}`)
-
-    }
-}
-const testIndex = (props, propName, componentName) => {
-    if(!(isInteger(props[propName]) && props[propName] >= -1)){
-        return new Error(`Invalid prop ${propName} supplied to ${componentName}`)
-    }
-}
 const mapStateToProps = (state) => {
     return{
+        state,
         questionnaires: state.questionnaires,
         dialog: state.dialog
     }
 }
 const mapDispatchToProps =(dispatch) =>{
-
+    return{
+        actions: Object.assign(
+            {},
+            bindActionCreators(QuestionnaireActions, dispatch),
+            bindActionCreators(DialogActions, dispatch)
+        )
+    }
 }
 
-export default class Home extends React.Component{
+class Home extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+        	isShow: false
+		}
+		this.addQuestionnaire = this.addQuestionnaire.bind(this)
+    }
+
+    componentWillMount() {
+        const {questionnaires: {list}, actions:{closeQuestionnaire}} = this.props
+        console.log('--------------')
+        console.log(this.props)
+        const now = new Date().getTime() - 86400000
+        list.forEach((questionnaire, questionnaireIndex) => {
+            questionnaire.status === RELEASED && questionnaire.time < now && closeQuestionnaire(questionnaireIndex)
+        })
+    }
+    componentDidMount () {
+        this.table = this.refs['table']
+    }
+	addQuestionnaire() {
+    	console.log('go')
+    	this.props.history.push("/add")
+	}
     render() {
-        return (
+        return(
             <div className={style.container}>
-                <table width="100%" cellPadding="0" cellSpacing="0">
+                <table width="100%" cellPadding="0" cellSpacing="0" ref="table">
                     <thead>
                     <tr>
                         <th width="30%">标题</th>
                         <th width="15%">时间</th>
                         <th width="15%">状态</th>
-                        <th width="27%">操作<button className={style.new}><span>+</span>新建问卷</button></th>
+                        <th width="27%">操作<button className={style.new} onClick={this.addQuestionnaire}><span>+</span>新建问卷</button></th>
                     </tr>
                     </thead>
                     <tbody className={style.content}>
@@ -92,3 +105,6 @@ export default class Home extends React.Component{
         )
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
+// export default Home

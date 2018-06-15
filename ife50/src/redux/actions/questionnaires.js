@@ -55,16 +55,15 @@ export const editText =  (content, question, option) => {
 }
 export const saveText =  (content) => {
     return{
-        type: 'EDIT_TEXT',
+        type: 'SAVE_TEXT',
         payload:{
-            content,
-
+            content
         }
     }
 }
 export const fillText =  (content, question) => {
     return{
-        type: 'EDIT_TEXT',
+        type: 'FILL_TEXT',
         payload:{
             content,
             question,
@@ -73,7 +72,7 @@ export const fillText =  (content, question) => {
 }
 export const chooseType =  (atype) => {
     return {
-        type: 'EDIT_TEXT',
+        type: 'CHOOSE_TYPE',
         payload:{
             atype
         }
@@ -111,14 +110,16 @@ export const copyQuestion =(question) => {
             question,
         }
     }
-}export const addOption =(question) => {
+}
+export const addOption =(question) => {
     return{
         type: 'ADD_OPTION',
         payload:{
-            question,
+            question
         }
     }
-}export const removeOption =(question, option) => {
+}
+export const removeOption =(question, option) => {
     return{
         type: 'REMOVE_OPTION',
         payload:{
@@ -126,7 +127,8 @@ export const copyQuestion =(question) => {
             question,
         }
     }
-}export const chooseOption =(question, option) => {
+}
+export const chooseOption =(question, option) => {
     return{
         type: 'CHOOSE_OPTION',
         payload:{
@@ -134,7 +136,8 @@ export const copyQuestion =(question) => {
             question,
         }
     }
-}export const toggleOption =(question, option) => {
+}
+export const toggleOption =(question, option) => {
     return{
         type: 'TOGGLE_OPTION',
         payload:{
@@ -142,14 +145,16 @@ export const copyQuestion =(question) => {
             question,
         }
     }
-}export const toggleRequirement =(question) => {
+}
+export const toggleRequirement =(question) => {
     return{
         type: 'TOGGLE_REQUIREMENT',
         payload:{
             question,
         }
     }
-}export const saveTime =(year, month, date) => {
+}
+export const saveTime =(year, month, date) => {
     return{
         type: 'SAVE_TIME',
         payload:{
@@ -158,11 +163,12 @@ export const copyQuestion =(question) => {
             date
         }
     }
-}export const checkData =(questionnaire) => {
+}
+export const checkData =(questionnaire) => {
     return{
         type: 'CHECK_DATA',
         payload:{
-            questionnaire,
+            questionnaire
         }
     }
 }

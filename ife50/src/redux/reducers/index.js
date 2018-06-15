@@ -1,6 +1,8 @@
 import {combineReducers} from 'redux'
-import counter from './counter'
+import questionnaires from './questionnaires'
+import dialog from './dialog'
 
 export default combineReducers({
-    counter
+    questionnaires,
+    dialog
 })

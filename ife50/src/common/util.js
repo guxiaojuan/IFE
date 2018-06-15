@@ -28,6 +28,8 @@
 *
 */
 
+
+import {Children} from 'react'
 export const cloneObject = (obj) => {
     // return JSON.parse(JSON.stringify(obj))
     let res = new obj.constructor()
@@ -56,4 +58,10 @@ export const isDate = (element) => {
 }
 export const isInteger = (num) =>{
     typeof num === 'number' && parseInt(num, 10) === num
+}
+
+export const mapChildrenToArray = (children) => {
+    const arr = []
+    Children.forEach(children,key => arr.push(key))
+    return arr
 }
