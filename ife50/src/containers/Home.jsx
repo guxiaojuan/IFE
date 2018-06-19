@@ -37,8 +37,6 @@ class Home extends React.Component{
 
     componentWillMount() {
         const {questionnaires: {list}, actions:{closeQuestionnaire}} = this.props
-        console.log('--------------')
-        console.log(this.props)
         const now = new Date().getTime() - 86400000
         list.forEach((questionnaire, questionnaireIndex) => {
             questionnaire.status === RELEASED && questionnaire.time < now && closeQuestionnaire(questionnaireIndex)
@@ -48,7 +46,6 @@ class Home extends React.Component{
         this.table = this.refs['table']
     }
 	addQuestionnaire() {
-    	console.log('go')
     	this.props.history.push("/add")
 	}
     render() {
@@ -107,4 +104,3 @@ class Home extends React.Component{
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
-// export default Home
