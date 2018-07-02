@@ -6,8 +6,8 @@ export default class Question extends React.Component {
 		super(props);
 	}
 	componentDidMount () {
-		console.log('--------question-------------')
-		console.log(this.props.questionList)
+		console.log('--------question-------------');
+		console.log(this.props.questionList);
 	}
 
 	renderList () {
@@ -16,6 +16,11 @@ export default class Question extends React.Component {
 		for (let i=0; i<questionList.length; i++) {
 			if (questionList[i].type === 'single') {
 				arr.push(<List key={i} idx={i} question={questionList[i].question} answer1={questionList[i].answer1} answer2={questionList[i].answer2} type={questionList[i].type}/>)
+			}else if(questionList[i].type === 'multi') {
+				arr.push(<List key={i} idx={i} question={questionList[i].question} answer1={questionList[i].answer1} answer2={questionList[i].answer2} answer3={questionList[i].answer3}
+							   answer4={questionList[i].answer4} type={questionList[i].type}/>)
+			}else if(questionList[i].type === 'text') {
+				arr.push(<List key={i} idx={i} question={questionList[i].question}/>)
 			}
 		}
 		return arr;
@@ -59,10 +64,10 @@ class List extends React.Component {
 			answer2 = this.props.answer2;
 			answer3 = this.props.answer3;
 			answer4 = this.props.answer4;
-			tmp.push(<div className={style["answer1"]}>{answer1}</div>)
-			tmp.push(<div className={style["answer2"]}>{answer2}</div>)
-			tmp.push(<div className={style["answer2"]}>{answer3}</div>)
-			tmp.push(<div className={style["answer2"]}>{answer4}</div>)
+			tmp.push(<div className={style["answer1"]}>{answer1}</div>);
+			tmp.push(<div className={style["answer2"]}>{answer2}</div>);
+			tmp.push(<div className={style["answer2"]}>{answer3}</div>);
+			tmp.push(<div className={style["answer2"]}>{answer4}</div>);
 		}else {
 			tmp.push(<textarea/>)
 		}

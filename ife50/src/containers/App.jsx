@@ -11,7 +11,7 @@ export default class App extends React.Component{
     render() {
         return (
             <Router>
-                <div>
+                <div className={style.wrapper}>
                     <div className={style.header}>
                         <h1 className={style.title}>问卷管理</h1>
                         <Link to="/statistic" className={style.link}><h2 className={style.tab}>我的问卷</h2></Link>

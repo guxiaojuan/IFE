@@ -4,7 +4,7 @@
   "description": "使用react实现一个问卷管理平台",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server -d --history-api-callback --hot --inline --port 8001"
+    "dev": "webpack-dev-server -d --hot --inline --port 8001"
   },
   "author": "",
   "license": "ISC",

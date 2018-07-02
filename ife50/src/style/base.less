@@ -8,7 +8,6 @@
   position: absolute;
   top: 40%;
   width: 66rem;
-  height: 22rem;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
@@ -22,4 +21,16 @@
   left: 0;
   right: 0;
   bottom: 0;
+}
+.l-flex-column {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  flex-flow: column;
+  height: 100%;
+}
+.l-flex-1 {
+  -webkit-box-flex: 1;
+  flex: 1;
+  overflow: hidden;
 }

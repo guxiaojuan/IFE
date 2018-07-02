@@ -1,9 +1,17 @@
 @import "base";
 
 .container{
-  .container-box;
-  .flex-center;
+  .l-flex-1;
+  position: relative;
   height:auto;
+  .main {
+    .container-box;
+    .flex-center;
+    flex-flow: column;
+    overflow: auto;
+    top: 10%;
+    transform: translate(-50%, 0);
+  }
   .list {
     border-bottom: 1px solid #eee;
   }
@@ -31,7 +39,7 @@
   }
   .content {
     border-bottom: 2px solid #ccc;
-    height: 9rem;
+    //height: 9rem;
     flex-flow: column;
 
     .select_ul {
@@ -50,7 +58,7 @@
     }
     button {
       width: 90%;
-      height: 70%;
+      height: 78%;
       background-color: #eee;
       border: none;
       outline: none;
