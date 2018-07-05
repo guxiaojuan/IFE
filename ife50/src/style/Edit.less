@@ -5,15 +5,27 @@
   position: relative;
   height:auto;
   .main {
-    .container-box;
-    .flex-center;
-    flex-flow: column;
+    //.flex-center;
+    //flex-flow: column;
+    position: absolute;
+    width: 66rem;
+    left: 50%;
     overflow: auto;
     top: 10%;
     transform: translate(-50%, 0);
+    bottom: 3rem;
+
+    .box {
+      .flex-center;
+      flex-flow: column;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.3);
+    }
   }
   .list {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #ccc;
+    width: 62rem;
   }
 
   .title, .content, .footer {

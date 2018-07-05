@@ -1,5 +1,49 @@
-.title {}
-.question {}
-.answer1 {}
-.answer2 {}
-.bottom {}
+@import "base";
+
+.list {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+.list:hover {
+  background-color: #FDF1E6;
+}
+
+
+.title {
+  margin-bottom: 1rem;
+  .num {
+    margin-right: 2rem;
+  }
+  .question {
+
+  }
+}
+.title:hover {
+  font-weight: bold;
+}
+.answer {
+  letter-spacing: .1rem;
+}
+
+.bottom {
+  list-style: none;
+
+  li {
+    float: right;
+    margin-left:2rem;
+  }
+}
+
+.textarea {
+  height: 3rem;
+}
+
+.list {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column;
+}
+
+.render {
+
+}
