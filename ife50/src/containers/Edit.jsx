@@ -1,7 +1,7 @@
-import React from 'react'
-import Question from '../components/question.jsx'
-import style from '../style/Edit.less'
-
+import React from 'react';
+import Question from '../components/question.jsx';
+import style from '../style/Edit.less';
+import {DatePicker} from 'antd';
 
 export default class Edit extends React.Component{
 	constructor(props) {
@@ -11,7 +11,8 @@ export default class Edit extends React.Component{
 			isPop: false,
 			title: JSON.parse(localStorage.getItem('questionTitle')) || '这里是标题',
 			questionList: JSON.parse(localStorage.getItem('questionList')) || [],
-			type: ''
+			type: '',
+			date: ''
 		};
 		this.onAdd = this.onAdd.bind(this)
 		this.changeHandle = this.changeHandle.bind(this)
@@ -23,11 +24,20 @@ export default class Edit extends React.Component{
 		this.onDown = this.onDown.bind(this)
 		this.onReuse = this.onReuse.bind(this)
 		this.onDel = this.onDel.bind(this)
+		this.changeDate = this.changeDate.bind(this);
+		this.changeStyle = this.changeStyle.bind(this);
 	}
 	changeHandle () {
 		console.log(this.inputValue.value)
 		localStorage.setItem('questionTitle', JSON.stringify(this.inputValue.value))
 	};
+	changeDate (value) {
+		console.log(value)
+	};
+	changeStyle () {
+		console.log(this.style)
+		console.log('---------------------------------')
+	}
 	onAdd (e) {
 		this.setState({
 			isShow: true
@@ -226,9 +236,23 @@ export default class Edit extends React.Component{
 						</div>
 
 						<div className={style.footer}>
-							<div className={style.left}>
+							<div className={style.left} onClick={this.changeStyle}>
 								<span>问卷截止日期</span>
-								<span className={style.date}>2018-06-15</span>
+								<DatePicker className={style.date} onChange={value => this.changeDate(value)} />
+								{/*<DatePicker*/}
+									{/*dateRender={(current) => {*/}
+										{/*const style = {};*/}
+										{/*if (current.date() === 1) {*/}
+											{/*style.border = '1px solid #1890ff';*/}
+											{/*style.borderRadius = '50%';*/}
+										{/*}*/}
+										{/*return (*/}
+											{/*<div className="ant-calendar-date" style={style}>*/}
+												{/*{current.date()}*/}
+											{/*</div>*/}
+										{/*);*/}
+									{/*}}*/}
+								{/*/>*/}
 							</div>
 
 							<div className={style.right}>

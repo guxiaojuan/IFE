@@ -144,7 +144,7 @@ class List extends React.Component {
 				</div>
 				{this.renderAnswer()}
 				<ul className={style.bottom}>
-					<li onClick={this.goUp.bind(this, this.props.idx)}>上移</li>
+					<li onClick={this.goUp.bind(this, idx)}>上移</li>
 					<li onClick={this.goDown.bind(this, idx)}>下移</li>
 					<li onClick={this.goReuse.bind(this, idx)}>复用</li>
 					<li onClick={this.goDel.bind(this, idx)}>删除</li>

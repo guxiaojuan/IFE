@@ -13,8 +13,8 @@ export default class App extends React.Component{
             <Router>
                 <div className={style.wrapper}>
                     <div className={style.header}>
-                        <h1 className={style.title}>问卷管理</h1>
-                        <Link to="/statistic" className={style.link}><h2 className={style.tab}>我的问卷</h2></Link>
+                        <div className={style.title}>问卷管理</div>
+                        <Link to="/statistic" className={style.link}>我的问卷</Link>
                     </div>
 
                     <Switch>
