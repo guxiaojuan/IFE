@@ -6,6 +6,8 @@ import Statistic from './Statistic.jsx'
 import style from '../style/Header.less'
 import {HashRouter as Router, Route, Link, Switch} from 'react-router-dom'
 
+import 'antd/dist/antd.css'
+
 
 export default class App extends React.Component{
     render() {

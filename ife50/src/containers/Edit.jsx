@@ -2,15 +2,20 @@ import React from 'react';
 import Question from '../components/question.jsx';
 import style from '../style/Edit.less';
 import {DatePicker} from 'antd';
+// import locale from 'antd/lib/date-picker/locale/zh_CN';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
 
 export default class Edit extends React.Component{
 	constructor(props) {
 		super(props);
+
+		let question = JSON.parse(localStorage.getItem('question')) || {}
 		this.state = {
 			isShow: false,
 			isPop: false,
-			title: JSON.parse(localStorage.getItem('questionTitle')) || '这里是标题',
-			questionList: JSON.parse(localStorage.getItem('questionList')) || [],
+			title: question['questionTitle'] || '这里是标题',
+			questionList: question['questionList'] || [],
 			type: '',
 			date: ''
 		};
@@ -25,19 +30,22 @@ export default class Edit extends React.Component{
 		this.onReuse = this.onReuse.bind(this)
 		this.onDel = this.onDel.bind(this)
 		this.changeDate = this.changeDate.bind(this);
-		this.changeStyle = this.changeStyle.bind(this);
+		this.onSave = this.onSave.bind(this);
+		this.onPublish = this.onPublish.bind(this);
 	}
 	changeHandle () {
-		console.log(this.inputValue.value)
+		this.setState({
+			title: this.inputValue.value
+		})
 		localStorage.setItem('questionTitle', JSON.stringify(this.inputValue.value))
 	};
 	changeDate (value) {
-		console.log(value)
+		let date = new Date(value['_d']);
+		let str = date.getFullYear() + '-' + date.getMonth() + '-' +date.getDay()
+		this.setState({
+			date:str
+		})
 	};
-	changeStyle () {
-		console.log(this.style)
-		console.log('---------------------------------')
-	}
 	onAdd (e) {
 		this.setState({
 			isShow: true
@@ -67,7 +75,8 @@ export default class Edit extends React.Component{
 		localStorage.setItem('questionList', JSON.stringify(arr))
 		this.setState ({
 			type: '',
-			isPop: false
+			isPop: false,
+			questionList: arr
 		})
 	}
 	onSelectedType (e) {
@@ -215,6 +224,21 @@ export default class Edit extends React.Component{
 			}
 		}
 	}
+	onSave () {
+		let question = {
+			questionTitle: this.state.title,
+			questionList: this.state.questionList,
+			questionDate: this.date,
+		}
+
+		localStorage.setItem('question',JSON.stringify(question));
+		localStorage.setItem('publish', false);
+	}
+	onPublish() {
+		this.onSave();
+		localStorage.setItem('publish', true)
+	}
+
 
     render(){
         return(
@@ -236,28 +260,14 @@ export default class Edit extends React.Component{
 						</div>
 
 						<div className={style.footer}>
-							<div className={style.left} onClick={this.changeStyle}>
+							<div className={style.left}>
 								<span>问卷截止日期</span>
-								<DatePicker className={style.date} onChange={value => this.changeDate(value)} />
-								{/*<DatePicker*/}
-									{/*dateRender={(current) => {*/}
-										{/*const style = {};*/}
-										{/*if (current.date() === 1) {*/}
-											{/*style.border = '1px solid #1890ff';*/}
-											{/*style.borderRadius = '50%';*/}
-										{/*}*/}
-										{/*return (*/}
-											{/*<div className="ant-calendar-date" style={style}>*/}
-												{/*{current.date()}*/}
-											{/*</div>*/}
-										{/*);*/}
-									{/*}}*/}
-								{/*/>*/}
+								<DatePicker className={style.date} onChange={value => this.changeDate(value)} placeholder="请选择日期" showToday={false}/>
 							</div>
 
 							<div className={style.right}>
-								<button>保存问卷</button>
-								<button>发布问卷</button>
+								<button onClick={this.onSave}>保存问卷</button>
+								<button onClick={this.onPublish}>发布问卷</button>
 							</div>
 						</div>
 

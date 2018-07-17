@@ -26,17 +26,18 @@ module.exports = {
             {
                 test:/\.less$/,
                 exclude: /node_modules\/antd/,   //不要让node_modules里antd的样式配置css-module
-                // loaders:[
-                //     'style-loader',
-                //     'css-loader',
-                //     'less-loader'
-                // ]
                 use: [
                     'style-loader',
                     { loader: 'css-loader', options: {modules: true} },   
                     'less-loader'
                 ]
-            }
+            },
+			{
+				test:/\.css$/,
+				use: [
+					'style-loader', 'css-loader'
+				]
+			}
         ]
     },
     plugins: [
