@@ -7,7 +7,7 @@ export default class Add  extends React.Component {
 		this.addQuestion = this.addQuestion.bind(this)
 	}
 	addQuestion () {
-		this.props.history.push('/edit')
+		this.props.history.push('/edit/new')
 	};
 	render () {
 		return (

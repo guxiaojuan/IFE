@@ -3,21 +3,30 @@ import Question from '../components/question.jsx';
 import style from '../style/Edit.less';
 import {DatePicker} from 'antd';
 // import locale from 'antd/lib/date-picker/locale/zh_CN';
-import moment from 'moment';
+// import moment from 'moment';
 import 'moment/locale/zh-cn';
 
 export default class Edit extends React.Component{
 	constructor(props) {
 		super(props);
+		let idx = this.props.match.params.idx;
+		let questionnaire = JSON.parse(localStorage.getItem('questionnaire')) || [];
+		let str = '';
+		if(idx && questionnaire[idx]) {
+			let date = new Date(questionnaire[idx]['questionDate']);
+			let year = date.getFullYear();
+			let month = parseInt(date.getMonth());
+			let day = parseInt(date.getDay());
+			str = year + '-' + (month >= 10?month: '0'+month) + '-' + (day >= 10?day: '0'+day);
+		}
 
-		let question = JSON.parse(localStorage.getItem('question')) || {}
 		this.state = {
 			isShow: false,
 			isPop: false,
-			title: question['questionTitle'] || '这里是标题',
-			questionList: question['questionList'] || [],
+			title: (idx && questionnaire[idx] && questionnaire[idx]['questionTitle']) || '这里是标题',
+			questionList: (idx && questionnaire[idx] && questionnaire[idx]['questionList']) || [],
 			type: '',
-			date: ''
+			date: str || '请选择日期',
 		};
 		this.onAdd = this.onAdd.bind(this)
 		this.changeHandle = this.changeHandle.bind(this)
@@ -30,21 +39,21 @@ export default class Edit extends React.Component{
 		this.onReuse = this.onReuse.bind(this)
 		this.onDel = this.onDel.bind(this)
 		this.changeDate = this.changeDate.bind(this);
-		this.onSave = this.onSave.bind(this);
-		this.onPublish = this.onPublish.bind(this);
 	}
 	changeHandle () {
 		this.setState({
 			title: this.inputValue.value
 		})
-		localStorage.setItem('questionTitle', JSON.stringify(this.inputValue.value))
 	};
-	changeDate (value) {
-		let date = new Date(value['_d']);
-		let str = date.getFullYear() + '-' + date.getMonth() + '-' +date.getDay()
+	componentDidMount () {
+		console.log(this.props.match.params.idx)
+	}
+	changeDate (moment) {
+		let date = new Date(moment['_d']).getTime();
 		this.setState({
-			date:str
+			date:date
 		})
+
 	};
 	onAdd (e) {
 		this.setState({
@@ -72,7 +81,7 @@ export default class Edit extends React.Component{
 		}
 		let arr = this.state.questionList
 		arr.push(list)
-		localStorage.setItem('questionList', JSON.stringify(arr))
+
 		this.setState ({
 			type: '',
 			isPop: false,
@@ -224,21 +233,33 @@ export default class Edit extends React.Component{
 			}
 		}
 	}
-	onSave () {
+	onBtn (type) {
+		if (this.state.questionList.length === 0) {
+			alert('没有创建问题');
+			return;
+		}
 		let question = {
 			questionTitle: this.state.title,
 			questionList: this.state.questionList,
-			questionDate: this.date,
+			questionDate: this.state.date,
+		}
+		if(type === 'save') {
+			question.isPublish = false
+		}else {
+			question.isPublish = true
 		}
 
-		localStorage.setItem('question',JSON.stringify(question));
-		localStorage.setItem('publish', false);
-	}
-	onPublish() {
-		this.onSave();
-		localStorage.setItem('publish', true)
-	}
+		let idx = this.props.match.params.idx;
+		let questionnaire = JSON.parse(localStorage.getItem('questionnaire')) || [];
+		if (idx && questionnaire[idx]) {
+			questionnaire[idx] = question;
+		}else {
+			questionnaire.push(question);
+		}
 
+		localStorage.setItem('questionnaire', JSON.stringify(questionnaire));
+		this.props.history.push('/')
+	}
 
     render(){
         return(
@@ -262,12 +283,12 @@ export default class Edit extends React.Component{
 						<div className={style.footer}>
 							<div className={style.left}>
 								<span>问卷截止日期</span>
-								<DatePicker className={style.date} onChange={value => this.changeDate(value)} placeholder="请选择日期" showToday={false}/>
+								<DatePicker className={style.date} onChange={value => this.changeDate(value)} placeholder={this.state.date} showToday={false}/>
 							</div>
 
 							<div className={style.right}>
-								<button onClick={this.onSave}>保存问卷</button>
-								<button onClick={this.onPublish}>发布问卷</button>
+								<button onClick={this.onBtn.bind(this, 'save')}>保存问卷</button>
+								<button onClick={this.onBtn.bind(this, 'publish')}>发布问卷</button>
 							</div>
 						</div>
 

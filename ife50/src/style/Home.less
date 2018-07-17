@@ -7,6 +7,20 @@
   left: 50%;
   transform: translate(-50%, 0);
 
+  .empty {
+    text-align: center;
+    height: 12rem;
+    line-height: 12rem;
+    font-size: 1.2rem;
+
+    a{
+      color:white;
+      background-color: #EF7419;
+      padding: 1.2rem;
+      border-radius: 5px;
+    }
+  }
+
   table {
     border-collapse: collapse; //为表格设置边框合并模型
   }
@@ -33,8 +47,9 @@
   }
   .content {
     background-color: white;
+
     tr {
-      height: 3em;
+      height: 3.8em;
       border-bottom: 1px solid #ccc;
       td:first-child {
         padding-left: 4em; //td不能设置margin，table可以，td只能设置padding
@@ -54,7 +69,7 @@
   }
   .wrap {
     padding-top: 2em;
-    padding-bottom: 4em;
+    padding-bottom: 3em;
     background-color: white;
     .all {
       content: '';

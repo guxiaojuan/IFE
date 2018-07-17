@@ -1,95 +1,121 @@
-import React, {PropTypes} from 'react'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
-import * as QuestionnaireActions from '../redux/actions/questionnaires'
-import * as DialogActions  from '../redux/actions/dialog'
-import {RADIO, CHECKBOX, TEXT} from "../constants/QuestionTypes"
-import {UNRELEASED, CLOSED, RELEASED} from "../constants/QuestionnaireStatusTypes"
-import style from '../style/Home.less'
-import {isArray, isInteger, cloneObject} from "../common/util"
-import {addQuestionnaire} from "../redux/actions/questionnaires";
+import React, {PropTypes} from 'react';
+import style from '../style/Home.less';
+import {Link} from 'react-router-dom';
 
-const mapStateToProps = (state) => {
-    return{
-        state,
-        questionnaires: state.questionnaires,
-        dialog: state.dialog
-    }
-}
-const mapDispatchToProps =(dispatch) =>{
-    return{
-        actions: Object.assign(
-            {},
-            bindActionCreators(QuestionnaireActions, dispatch),
-            bindActionCreators(DialogActions, dispatch)
-        )
-    }
-}
-
-class Home extends React.Component{
+export default class Home extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-        	isShow: false
+        	isShow: false,
+			questionnaire: JSON.parse(localStorage.getItem('questionnaire')) || []
 		}
-		this.addQuestionnaire = this.addQuestionnaire.bind(this)
+		this.addQuestionnaire = this.addQuestionnaire.bind(this);
+        this.formatDate = this.formatDate.bind(this);
+        this.edit = this.edit.bind(this);
+        this.delete = this.delete.bind(this);
+        this.goChart = this.goChart.bind(this);
     }
 
     componentWillMount() {
-        const {questionnaires: {list}, actions:{closeQuestionnaire}} = this.props
-        const now = new Date().getTime() - 86400000
-        list.forEach((questionnaire, questionnaireIndex) => {
-            questionnaire.status === RELEASED && questionnaire.time < now && closeQuestionnaire(questionnaireIndex)
-        })
     }
     componentDidMount () {
-        this.table = this.refs['table']
     }
 	addQuestionnaire() {
     	this.props.history.push("/add")
 	}
+	formatDate (questionDate){
+		let date = new Date(questionDate);
+		let year = date.getFullYear();
+		let month = parseInt(date.getMonth());
+		let day = parseInt(date.getDay());
+		let str = year + '-' + (month >= 10?month: '0'+month) + '-' + (day >= 10?day: '0'+day);
+		return str;
+	}
+	edit (i) {
+    	this.props.history.push("/edit/" + i);
+	};
+    delete (i) {
+    	let questionnaire = this.state.questionnaire;
+		questionnaire.splice(i,1);
+		this.setState({
+			questionnaire: questionnaire
+		})
+		localStorage.setItem('questionnaire', JSON.stringify(questionnaire));
+	};
+    goChart (i) {
+    	this.props.history.push("/chartData/" + i);
+	};
+	renderList () {
+    	let questionnaire = this.state.questionnaire
+    	let len = questionnaire.length;
+		let arr = [];
+    	if (len > 0) {
+    		for(let i=0; i<len; i++) {
+    			let deadline = questionnaire[i].questionDate;
+    			let now = new Date().getTime();
+    			if (now <= deadline) {   //问卷还未截止
+					if (questionnaire[i].isPublish) {   //已发布
+						arr.push(
+							<tr>
+								<td><span className={style.lspan}></span>{questionnaire[i].questionTitle}</td>
+								<td>{this.formatDate(deadline)}</td>
+								<td>已发布</td>
+								<td>
+									<button onClick={this.edit(i)}>编辑</button>
+									<button onClick={this.delete(i)}>删除</button>
+									<button onClick={this.goChart(i)}>查看数据</button>
+								</td>
+							</tr>
+						)
+					}else {              //未发布
+						arr.push(
+							<tr>
+								<td><span className={style.lspan}></span>{questionnaire[i].questionTitle}</td>
+								<td>{this.formatDate(deadline)}</td>
+								<td>未发布</td>
+								<td>
+									<button onClick={this.edit(i)}>编辑</button>
+									<button onClick={this.delete(i)}>删除</button>
+									<button onClick={this.goChart(i)}>查看数据</button>
+								</td>
+							</tr>
+						)
+					}
+
+				}else {
+    				arr.push(
+    					<tr>
+							<td><span className={style.lspan}></span>{questionnaire[i].questionTitle}</td>
+							<td>{this.formatDate(deadline)}</td>
+							<td>已结束</td>
+							<td>
+								<button onClick={this.delete(i)}>删除</button>
+								<button onClick={this.goChart(i)}>查看数据</button>
+							</td>
+						</tr>
+					)
+				}
+
+			}
+		}
+		return arr;
+	}
     render() {
-        return(
+		let questionnaire = this.state.questionnaire
+		let len = questionnaire.length;
+        return len > 0 ?(
             <div className={style.container}>
                 <table width="100%" cellPadding="0" cellSpacing="0" ref="table">
                     <thead>
                     <tr>
                         <th width="30%">标题</th>
-                        <th width="15%">时间</th>
-                        <th width="15%">状态</th>
-                        <th width="27%">操作<button className={style.new} onClick={this.addQuestionnaire}><span>+</span>新建问卷</button></th>
+                        <th width="16%">截止时间</th>
+                        <th width="12%">状态</th>
+                        <th width="29%">操作<button className={style.new} onClick={this.addQuestionnaire}><span>+</span>新建问卷</button></th>
                     </tr>
                     </thead>
                     <tbody className={style.content}>
-                    <tr>
-                        <td><span className={style.lspan}></span>这是我的第一份问卷</td>
-                        <td>2018-01-12</td>
-                        <td>已结束</td>
-                        <td>
-                            <button>删除</button>
-                            <button>查看数据</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span className={style.lspan}></span>这是我的第二份问卷</td>
-                        <td>2018-01-12</td>
-                        <td>未发布</td>
-                        <td>
-                            <button>编辑</button>
-                            <button>删除</button>
-                            <button>查看数据</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span className={style.lspan}></span>这是我的第三份问卷</td>
-                        <td>2018-01-12</td>
-                        <td>发布中</td>
-                        <td>
-                            <button>编辑</button>
-                            <button>删除</button>
-                            <button>查看数据</button>
-                        </td>
-                    </tr>
+					{this.renderList()}
                     </tbody>
                 </table>
 
@@ -99,8 +125,12 @@ class Home extends React.Component{
                     </div>
                 </div>
             </div>
-        )
+        ):(
+			<div className={style.container}>
+				<div className={style.empty}>
+					<Link to="/edit/new" >暂无问卷信息, 快去新建问卷</Link>
+				</div>
+			</div>
+		)
     }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -65,3 +65,12 @@ export const mapChildrenToArray = (children) => {
     Children.forEach(children,key => arr.push(key))
     return arr
 }
+
+export 	const formatDate  = (questionDate) =>{
+	let date = new Date(questionDate);
+	let year = date.getFullYear();
+	let month = parseInt(date.getMonth());
+	let day = parseInt(date.getDay());
+	let str = year + '-' + (month >= 10?month: '0'+month) + '-' + (day >= 10?day: '0'+day);
+	return str;
+}

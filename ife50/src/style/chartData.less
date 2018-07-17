@@ -1,0 +1,25 @@
+@import "base";
+
+.container {
+  .l-flex-1;
+  position: relative;
+  height: auto;
+  background-color: #eee;
+  .main {
+    position: absolute;
+    width: 66rem;
+    left: 50%;
+    overflow: auto;
+    top: 10%;
+    transform: translate(-50%, 0);
+    bottom: 3rem;
+
+    .box {
+      .flex-center;
+      flex-flow: column;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
