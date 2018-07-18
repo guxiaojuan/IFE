@@ -15,7 +15,7 @@ export default class ChartData extends React.Component {
 
 		function toPercent(point){
 			let str=Number(point*100).toFixed(2);
-			str+="%";
+			// str+="%";
 			return str;
 		}
 
@@ -29,10 +29,6 @@ export default class ChartData extends React.Component {
 			}
 		})
 
-		let all = single + multi + text;
-		single = single/all;
-		multi = multi/all;
-		text = text/all;
 		this.state = {
 			question: questionnaire[tab],
 			single: single,
@@ -45,9 +41,17 @@ export default class ChartData extends React.Component {
 		// console.log('---------路由--------')
 		// console.log(this.props);
 		// console.log(this.props.match.params.tab)
-		let myBar = echarts.init(document.querySelector('#bar'));
+		function toPercent(point){
+			let str=Number(point*100).toFixed(2);
+			return str;
+		}
+		let all = this.state.single + this.state.multi + this.state.text;
+		let single = toPercent(this.state.single/all);
+		let multi = toPercent(this.state.multi/all);
+		let text = toPercent(this.state.text/all);
 
-		let barArr = [this.state.single, this.state.multi, this.state.text];
+		let myBar = echarts.init(document.querySelector('#bar'));
+		let Arr = [single, multi, text];
 		let barOptions = {
 			title: {
 				text: '数据占比_柱状图'
@@ -58,16 +62,51 @@ export default class ChartData extends React.Component {
 			},
 			yAxis: {
 				type: 'value',
-				boundaryGap: [0, '100%']
+				axisLabel: {
+					show: true,
+					interval: 'auto',
+					formatter: '{value}%'
+				}
 			},
 			series: [{
-				data: barArr,
-				type: 'bar'
+				data: Arr,
+				type: 'bar',
+				itemStyle: {
+					label: {
+						show: true,
+						// position: 'top',
+						formatter: '{b}\n{c}%'
+					}
+				}
 			}]
 		}
 		myBar.setOption(barOptions);
-		console.log('============图表===============')
-		console.log(myBar)
+
+		let myPie = echarts.init(document.querySelector('#pie'));
+		let pieOptions = {
+			title: {
+				text: '数据占比_饼状图'
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{b}:{c}道({d}%)"
+			},
+			legend: {
+				bottom: 10,
+				left: 'center',
+				data: ['单选题', '多选题', '文本题']
+			},
+			series: [{
+				type: 'pie',
+				radius: '65%',
+				data: [
+					{value:this.state.single, name:'单选题'},
+					{value:this.state.multi, name:'多选题'},
+					{value:this.state.text, name:'文本题'},
+				],
+			}]
+		}
+		myPie.setOption(pieOptions);
 	};
 
 	componentWillUnmount () {
@@ -91,12 +130,12 @@ export default class ChartData extends React.Component {
 							<h3 className={style.topic3}>此统计分析只包含完整回收的数据</h3>
 						</header>
 						<div className={style.content}>
-							<div>数据图表_数据占比</div>
+							<div className={style['data_header']}>数据图表_数据占比</div>
 
 							<div className={style.bar} id="bar"/>
 							<div className={style.pie} id="pie"/>
 						</div>
-						<footer className={style.foot} onClick={() => this.props.history.push('/')}>返回</footer>
+						<button className={style.foot} onClick={() => this.props.history.push('/')}>返回</button>
 					</div>
 				</div>
 			</div>
