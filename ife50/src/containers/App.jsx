@@ -2,7 +2,8 @@ import React from 'react'
 import Edit from './Edit.jsx'
 import Home from './Home.jsx'
 import Add from './add.jsx'
-import chartData from './chartData.jsx'
+import ChartData from './chartData.jsx'
+import Chart from './chart.jsx'
 import style from '../style/Header.less'
 import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 
@@ -23,7 +24,8 @@ export default class App extends React.Component{
                         <Route exact path="/" component={Home}/>
                         <Route path="/edit/:idx" component={Edit}/>
                         <Route path="/add" component={Add}/>
-                        <Route path="/chartData/:tab" component={chartData}/>
+                        <Route path="/chartData/:tab" component={ChartData}/>
+                        <Route path="/chart" component={Chart}/>
                     </Switch>
                 </div>
             </Router>
