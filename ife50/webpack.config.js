@@ -33,6 +33,14 @@ module.exports = {
                 ]
             },
 			{
+				test: /\.(png|jpg|gif|svg)$/,
+				loader: 'url-loader',
+				options: {
+					limit: 3000,
+					name: '[name].[hash].[ext]'
+				}
+			},
+			{
 				test:/\.css$/,
 				use: [
 					'style-loader', 'css-loader'

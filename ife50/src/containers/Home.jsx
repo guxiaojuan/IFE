@@ -11,9 +11,6 @@ export default class Home extends React.Component{
 		}
 		this.addQuestionnaire = this.addQuestionnaire.bind(this);
         this.formatDate = this.formatDate.bind(this);
-        this.edit = this.edit.bind(this);
-        this.delete = this.delete.bind(this);
-        this.goChart = this.goChart.bind(this);
     }
 
     componentWillMount() {
@@ -35,7 +32,7 @@ export default class Home extends React.Component{
     	this.props.history.push("/edit/" + i);
 	};
     delete (i) {
-    	let questionnaire = this.state.questionnaire;
+		let questionnaire = this.state.questionnaire;
 		questionnaire.splice(i,1);
 		this.setState({
 			questionnaire: questionnaire
@@ -43,6 +40,7 @@ export default class Home extends React.Component{
 		localStorage.setItem('questionnaire', JSON.stringify(questionnaire));
 	};
     goChart (i) {
+    	console.log(i)
     	this.props.history.push("/chartData/" + i);
 	};
 	renderList () {
@@ -61,9 +59,9 @@ export default class Home extends React.Component{
 								<td>{this.formatDate(deadline)}</td>
 								<td>已发布</td>
 								<td>
-									<button onClick={this.edit(i)}>编辑</button>
-									<button onClick={this.delete(i)}>删除</button>
-									<button onClick={this.goChart(i)}>查看数据</button>
+									<button onClick={this.edit.bind(this, i)}>编辑</button>
+									<button onClick={this.delete.bind(this,i)}>删除</button>
+									<button onClick={this.goChart.bind(this,i)}>查看数据</button>
 								</td>
 							</tr>
 						)
@@ -74,9 +72,9 @@ export default class Home extends React.Component{
 								<td>{this.formatDate(deadline)}</td>
 								<td>未发布</td>
 								<td>
-									<button onClick={this.edit(i)}>编辑</button>
-									<button onClick={this.delete(i)}>删除</button>
-									<button onClick={this.goChart(i)}>查看数据</button>
+									<button onClick={this.edit.bind(this, i)}>编辑</button>
+									<button onClick={this.delete.bind(this,i)}>删除</button>
+									<button onClick={this.goChart.bind(this,i)}>查看数据</button>
 								</td>
 							</tr>
 						)
@@ -89,8 +87,8 @@ export default class Home extends React.Component{
 							<td>{this.formatDate(deadline)}</td>
 							<td>已结束</td>
 							<td>
-								<button onClick={this.delete(i)}>删除</button>
-								<button onClick={this.goChart(i)}>查看数据</button>
+								<button onClick={this.delete.bind(this,i)}>删除</button>
+								<button onClick={this.goChart.bind(this,i)}>查看数据</button>
 							</td>
 						</tr>
 					)

@@ -20,6 +20,41 @@
       background-color: white;
       border-radius: 5px;
       box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+
+      .title {
+        height:8rem;
+        width: 100%;
+        border-bottom: 1px solid #cccccc;
+        .return {
+          width: 6rem;
+          height: 2rem;
+          .char {
+            margin-left: 1.3rem;
+            font-size: 1rem;
+          }
+        }
+        .return:before {
+          position: absolute;
+          top: 20px;
+          width: 14px;
+          height: 14px;
+          border-left: 2px solid #afafaf;
+          border-top: 2px solid #afafaf;
+          content: '';
+          transform:rotate(-45deg);
+        }
+
+        .topic1,.topic3  {
+          text-align: center;
+        }
+      }
+      .content {
+
+      }
+      .foot {
+
+      }
     }
   }
 }

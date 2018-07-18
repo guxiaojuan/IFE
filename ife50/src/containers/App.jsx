@@ -23,7 +23,7 @@ export default class App extends React.Component{
                         <Route exact path="/" component={Home}/>
                         <Route path="/edit/:idx" component={Edit}/>
                         <Route path="/add" component={Add}/>
-                        <Route path="/chartData/:idx" component={chartData}/>
+                        <Route path="/chartData/:tab" component={chartData}/>
                     </Switch>
                 </div>
             </Router>
