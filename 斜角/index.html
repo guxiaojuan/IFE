@@ -1,2 +1,21 @@
-﻿在css中，相邻边框的颜色区分会产生斜角效果，将css的盒子的height和width设置为0，
-设置border可以出现三角形，斜角等效果
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>斜角效果</title>
+	<style>
+		#div1 {	
+			font-size: 0;
+			line-height: 0;
+			border-width: 10px;
+			border-color: red;
+			border-left-width: 0;
+			border-style: dashed;
+			border-right-style: solid;
+			border-top-color: transparent;
+		}
+	</style>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+</html>
